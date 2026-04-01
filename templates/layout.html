@@ -1,46 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register Form Biology Olympiad SMA N 20 SEMARANG</title>
-<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>  
-  
-<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
+    <style>
+        /* Custom styling for DataTables to match Tailwind */
+        .dataTables_wrapper .dataTables_length select, 
+        .dataTables_wrapper .dataTables_filter input {
+            @apply border border-gray-300 rounded-lg px-2 py-1 outline-none focus:ring-2 focus:ring-green-500;
+        }
+        table.dataTable { border-collapse: collapse !important; }
+    </style>
 </head>
-<body>
-    <nav class="navbar navbar-dark bg-dark">
-      <a class="navbar-brand" href="/">Register Form Biology Olympiad SMA N 20 SEMARANG</a>
+<body class="bg-slate-50 font-sans text-slate-900">
+    
+    <nav class="bg-green-700 shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between items-center h-16">
+                <a href="/" class="text-white font-bold text-lg tracking-tight">
+                    <span class="hidden sm:inline">Biology Olympiad SMA N 20 SEMARANG</span>
+                    <span class="sm:hidden">Bio-Olympiad</span>
+                </a>
+                <div class="flex items-center space-x-4">
+                    <a href="/logout" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg text-sm font-semibold transition">Logout</a>
+                </div>
+            </div>
+        </div>
     </nav>
   
-    <div class="container pt-4">
-      {% block body %}
-      {% endblock %}
-    </div>
-   
-<script>
-const btnDelete= document.querySelectorAll('.btn-delete');
-if(btnDelete) {
-  const btnArray = Array.from(btnDelete);
-  btnArray.forEach((btn) => {
-    btn.addEventListener('click', (e) => {
-      if(!confirm('Are you sure you want to delete it?')){
-        e.preventDefault();
-      }
-    });
-  })
-}
-  
-$(document).ready(function() {
-    $('#example').DataTable({     
-      "aLengthMenu": [[3, 5, 10, 25, -1], [3, 5, 10, 25, "All"]],
-        "iDisplayLength": 3
-       } 
-    );
-} );
-  
-</script>
-  </body>
+    <main class="max-w-7xl mx-auto px-4 py-8">
+        {% block body %}
+        {% endblock %}
+    </main>
+
+    <script>
+        // Konfirmasi Hapus
+        $(document).on('click', '.btn-delete', function(e) {
+            if(!confirm('are you sure deleting this data?')) {
+                e.preventDefault();
+            }
+        });
+
+        // Inisialisasi DataTables
+        $(document).ready(function() {
+            $('#example').DataTable({
+                "pageLength": 5,
+                "lengthMenu": [[5, 10, 25, -1], [5, 10, 25, "Semua"]],
+                "language": {
+                    "search": "Search Student",
+                    "lengthMenu": "Tampilkan _MENU_ data"
+                }
+            });
+        });
+    </script>
+</body>
 </html>
