@@ -1,0 +1,4 @@
+ALTER TABLE students ADD COLUMN password VARCHAR(255);
+ALTER TABLE students ADD COLUMN profile_pic VARCHAR(255);
+ALTER TABLE students ADD COLUMN status VARCHAR(20) DEFAULT 'aktif';
+ALTER TABLE students ADD COLUMN role VARCHAR(20) DEFAULT 'user';
