@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+{% block body %}
+<div class="flex items-center justify-center min-h-[70vh]">
+    <div class="w-full max-w-md bg-white p-8 rounded-2xl shadow-xl border border-slate-100">
+        <div class="text-center mb-8">
+            <h2 class="text-3xl font-bold text-slate-800">Welcome Back</h2>
+            <p class="text-slate-500 text-sm">Masuk ke Sistem Bio-Olympiad</p>
+        </div>
+        <form action="/login" method="POST" class="space-y-4">
+            <input type="text" name="phone" placeholder="Nomor HP" class="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-green-500 outline-none">
+            <input type="password" name="password" placeholder="Password" class="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-green-500 outline-none">
+            <button class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded-xl transition shadow-lg">Login</button>
+        </form>
+        <p class="mt-6 text-center text-sm text-slate-600">
+            Belum punya akun? <a href="/register" class="text-green-600 font-bold hover:underline">Daftar di sini</a>
+        </p>
+    </div>
+</div>
+{% endblock %}

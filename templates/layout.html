@@ -12,7 +12,6 @@
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 
     <style>
-        /* Custom styling for DataTables to match Tailwind */
         .dataTables_wrapper .dataTables_length select, 
         .dataTables_wrapper .dataTables_filter input {
             @apply border border-gray-300 rounded-lg px-2 py-1 outline-none focus:ring-2 focus:ring-green-500;
@@ -25,11 +24,15 @@
     <nav class="bg-green-700 shadow-lg sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4">
             <div class="flex justify-between items-center h-16">
-                <a href="/" class="text-white font-bold text-lg tracking-tight">
-                    <span class="hidden sm:inline">Biology Olympiad SMA N 20 SEMARANG</span>
-                    <span class="sm:hidden">Bio-Olympiad</span>
+                <a href="{{ url_for('index') }}" class="text-white font-bold text-lg tracking-tight">
+                    Bio-Olympiad
                 </a>
+
                 <div class="flex items-center space-x-4">
+                    <a href="{{ url_for('login_page') }}" class="text-white hover:text-green-200 text-sm font-semibold">Login</a>
+                    
+                    <a href="{{ url_for('register_page') }}" class="bg-white text-green-700 px-4 py-2 rounded-lg text-sm font-bold hover:bg-green-50 transition">Daftar</a>
+                    
                     <a href="/logout" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg text-sm font-semibold transition">Logout</a>
                 </div>
             </div>
@@ -42,14 +45,12 @@
     </main>
 
     <script>
-        // Konfirmasi Hapus
         $(document).on('click', '.btn-delete', function(e) {
             if(!confirm('are you sure deleting this data?')) {
                 e.preventDefault();
             }
         });
 
-        // Inisialisasi DataTables
         $(document).ready(function() {
             $('#example').DataTable({
                 "pageLength": 5,

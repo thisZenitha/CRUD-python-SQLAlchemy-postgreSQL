@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+{% block body %}
+<div class="flex items-center justify-center min-h-[70vh]">
+    <div class="w-full max-w-lg bg-white p-8 rounded-2xl shadow-xl border border-slate-100">
+        <h2 class="text-2xl font-bold text-slate-800 mb-6 text-center font-mono">Form Registrasi Peserta</h2>
+        <form action="{{ url_for('add_student') }}" method="POST" enctype="multipart/form-data" class="space-y-4">
+            <div class="grid grid-cols-2 gap-4">
+                <input type="text" name="fname" placeholder="Nama Depan" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none">
+                <input type="text" name="lname" placeholder="Nama Belakang" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none">
+            </div>
+            <input type="text" name="phone" placeholder="Nomor HP" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none">
+            <input type="password" name="password" placeholder="Password" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none">
+            <input type="file" name="profile_pic" class="w-full text-xs text-slate-500 file:bg-slate-100 file:border-0 file:rounded-full file:px-4 file:py-2">
+            <button class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-xl transition">Daftar Sekarang</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

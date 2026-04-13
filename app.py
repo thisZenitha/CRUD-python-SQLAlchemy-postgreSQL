@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_sqlalchemy import SQLAlchemy
+from flask_jwt_extended import unset_jwt_cookies
 import os
 from werkzeug.utils import secure_filename
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -69,13 +70,18 @@ def index():
     
     if user_id:
         user = Student.query.get(user_id)
-        if user: 
-            user_role = user.role
-        else:
-            user_role = "guest"
+        user_role = user.role if user else "guest"
             
     all_students = Student.query.all()
     return render_template('index.html', list_users=all_students, role=user_role)
+
+@app.route('/register', methods=['GET'])
+def register_page():
+    return render_template('register.html')
+
+@app.route('/login', methods=['GET'])
+def login_page():
+    return render_template('login.html')
 
 @app.route('/submit', methods=['POST']) 
 def add_student(): 
@@ -130,7 +136,6 @@ def logout():
     unset_jwt_cookies(response)
     flash("Berhasil keluar!")
     return response
-from flask_jwt_extended import unset_jwt_cookies
 
 @jwt.expired_token_loader
 def my_expired_token_callback(jwt_header, jwt_payload):
