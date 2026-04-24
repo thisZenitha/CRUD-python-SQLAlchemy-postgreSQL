@@ -27,14 +27,15 @@
                 <a href="{{ url_for('index') }}" class="text-white font-bold text-lg tracking-tight">
                     Bio-Olympiad
                 </a>
-
-                <div class="flex items-center space-x-4">
+            <div class="flex items-center space-x-4">
+                {% if role == 'guest' %}
                     <a href="{{ url_for('login_page') }}" class="text-white hover:text-green-200 text-sm font-semibold">Login</a>
-                    
                     <a href="{{ url_for('register_page') }}" class="bg-white text-green-700 px-4 py-2 rounded-lg text-sm font-bold hover:bg-green-50 transition">Daftar</a>
-                    
+                {% else %}
+                    <span class="text-green-100 text-sm mr-2 italic">Role: {{ role }}</span>
                     <a href="/logout" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg text-sm font-semibold transition">Logout</a>
-                </div>
+                {% endif %}
+            </div>
             </div>
         </div>
     </nav>

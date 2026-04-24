@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, render_template, request, redirect, url_for, flash 
 from flask_sqlalchemy import SQLAlchemy
 from flask_jwt_extended import unset_jwt_cookies
 import os
@@ -75,13 +75,23 @@ def index():
     all_students = Student.query.all()
     return render_template('index.html', list_users=all_students, role=user_role)
 
-@app.route('/register', methods=['GET'])
-def register_page():
-    return render_template('register.html')
-
 @app.route('/login', methods=['GET'])
+@jwt_required(optional=True) # Tambahkan ini untuk cek status login
 def login_page():
-    return render_template('login.html')
+    user_id = get_jwt_identity()
+    if user_id: # Jika user sudah login (punya ID)
+        return redirect(url_for('index')) # Langsung lempar ke List View
+    
+    return render_template('login.html', role='guest')
+
+@app.route('/register', methods=['GET'])
+@jwt_required(optional=True)
+def register_page():
+    user_id = get_jwt_identity()
+    if user_id:
+        return redirect(url_for('index'))
+        
+    return render_template('register.html', role='guest')
 
 @app.route('/submit', methods=['POST']) 
 def add_student(): 
@@ -113,7 +123,7 @@ def add_student():
 def login():
     phone = request.form.get('phone')
     password = request.form.get('password')
-    
+
     user = Student.query.filter_by(phone=phone).first()
 
     if user and check_password_hash(user.password, password):
